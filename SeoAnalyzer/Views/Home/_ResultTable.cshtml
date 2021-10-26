@@ -1,0 +1,30 @@
+﻿@using CoreLibrary;
+@model List<Analyzer.WordsCount>
+
+<div class="row">
+	<div class="col">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Words</th>
+					<th>Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (Model.Count > 0)
+				{
+					for (int i = 0; i < Model.Count; i++)
+					{
+						<tr>
+							<td>@(i+1)</td>
+							<td>@Model.ElementAt(i).Word</td>
+							<td>@Model.ElementAt(i).Count</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+		<hr />
+	</div>
+</div>

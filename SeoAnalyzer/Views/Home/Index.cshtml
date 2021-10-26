@@ -1,0 +1,95 @@
+﻿@model SeoAnalyzer.Models.FilterModel
+@{
+	ViewBag.Title = "Home Page";
+}
+
+@section styles{
+	@Styles.Render("~/Content/datatables.min.css")
+}
+
+@section scripts{
+	@Scripts.Render("~/Scripts/datatables.min.js")
+
+	<script>
+		$(document).ready(function () {
+			$('form').attr('onsubmit', 'return false');
+		})
+
+		function Search() {
+			if ($('#SearchText').val().length > 0) {
+				$.post('@Url.Action("AnalyzeText")', $('form').serialize(), function (res) {
+					if (res.IsValid) {
+						$('#result').html(res.Message)
+						BindTable();
+					} else {
+						alert(res.Message)
+					}
+				}).fail(function (res) {
+					console.log(res);
+				})
+			} else {
+				alert('Please input text!');
+			}
+		}
+
+		function BindTable() {
+			$('.table').DataTable()
+		}
+	</script>
+}
+
+
+@using (Html.BeginForm())
+{
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<div class="row align-items-center">
+						<div class="col-2">
+							<label>English Text / Url</label>
+						</div>
+						<div class="col">
+							@Html.TextAreaFor(x => x.SearchText, new { @class = "form-control", placeholder = "English text / URL" })
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col offset-2">
+							@Html.CheckBoxFor(x => x.FilterWords, new { @class = "form-check-input" })
+							@Html.LabelFor(x => x.FilterWords, "Filter stop words", new { @class = "form-check-label" })
+						</div>
+						<div class="col">
+							@Html.CheckBoxFor(x => x.CountTotalWords, new { @class = "form-check-input" })
+							@Html.LabelFor(x => x.CountTotalWords, "Count total words", new { @class = "form-check-label" })
+						</div>
+						<div class="col">
+							@Html.CheckBoxFor(x => x.CountMetaTags, new { @class = "form-check-input" })
+							@Html.LabelFor(x => x.CountMetaTags, "Count meta tags", new { @class = "form-check-label" })
+						</div>
+						<div class="col">
+							@Html.CheckBoxFor(x => x.CountExternalLink, new { @class = "form-check-input" })
+							@Html.LabelFor(x => x.CountExternalLink, "Count external link", new { @class = "form-check-label" })
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col text-end">
+							<button class="btn btn-success" onclick="Search();">Search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col">
+			<div class="card">
+				<div class="card-body" id="result">
+					<p class="text-center">
+						Fill in the filter and click search to find out what will happen next!
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+}

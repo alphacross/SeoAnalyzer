@@ -1,0 +1,18 @@
+﻿@model SeoAnalyzer.Models.ResultModel
+
+@if (Model.IsCountTotalWords)
+{
+	<h2>Total Words</h2>
+	@Html.Partial("_ResultTable", Model.TotalWords)
+}
+@if (Model.IsCountTotalTags)
+{
+	<h2>Meta Tags</h2>
+	@Html.Partial("_ResultTable", Model.TotalTags)
+}
+@if (Model.IsCountTotalLinks)
+{
+	<h2>External Links</h2>
+	@Html.Partial("_ResultTable", Model.TotalLinks)
+}
+
