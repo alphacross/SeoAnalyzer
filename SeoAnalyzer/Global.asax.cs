@@ -18,11 +18,5 @@ namespace SeoAnalyzer
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 		}
-
-		protected void Application_Error(object sender, EventArgs e)
-		{
-			Exception myError = HttpContext.Current.Server.GetLastError();
-			Log.AddErrorLog(myError);
-		}
 	}
 }

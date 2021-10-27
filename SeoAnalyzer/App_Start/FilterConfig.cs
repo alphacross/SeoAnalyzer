@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using SeoAnalyzer.CustomAttributes;
+using System.Web;
 using System.Web.Mvc;
 
 namespace SeoAnalyzer
@@ -7,7 +8,7 @@ namespace SeoAnalyzer
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
-			//filters.Add(new HandleErrorAttribute());
+			filters.Add(new CustomHandleErrorAttribute());
 		}
 	}
 }
