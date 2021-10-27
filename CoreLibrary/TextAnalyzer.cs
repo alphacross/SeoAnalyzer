@@ -14,27 +14,43 @@ namespace CoreLibrary
 		}
 		public override List<WordsCount> CountTotalWords()
 		{
-			var words = GetAllWords(_searchText);
-			if (_filterWords)
+			try
 			{
-				words = FilterWords(words);
-			}
+				var words = GetAllWords(_searchText);
+				if (_filterWords)
+				{
+					words = FilterWords(words);
+				}
 
-			return words.GroupBy(x => x).Select(x => new WordsCount {Word = x.Key, Count = x.Count() }).ToList();
+				return words.GroupBy(x => x).Select(x => new WordsCount { Word = x.Key, Count = x.Count() }).ToList();
+			}
+			catch (Exception ex)
+			{
+				Log.AddErrorLog(ex);
+				throw ex;
+			}
 		}
 
 		public override List<WordsCount> CountTotalExternalLink()
 		{
-			var validLinks = new List<string>();
-			foreach (var word in GetAllLinks(_searchText))
+			try
 			{
-				if (AppLogic.IsUrl(word))
+				var validLinks = new List<string>();
+				foreach (var word in GetAllLinks(_searchText))
 				{
-					validLinks.Add(word);
+					if (AppLogic.IsUrl(word))
+					{
+						validLinks.Add(word);
+					}
 				}
-			}
 
-			return validLinks.GroupBy(x => x).Select(x => new WordsCount { Word = x.Key, Count = x.Count() }).ToList(); ;
+				return validLinks.GroupBy(x => x).Select(x => new WordsCount { Word = x.Key, Count = x.Count() }).ToList();
+			}
+			catch (Exception ex)
+			{
+				Log.AddErrorLog(ex);
+				throw ex;
+			}
 		}
 
 		public override List<WordsCount> CountTotalMetaTags()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +21,8 @@ namespace SeoAnalyzer
 
 		protected void Application_Error(object sender, EventArgs e)
 		{
-			//log global error
+			Exception myError = HttpContext.Current.Server.GetLastError();
+			Log.AddErrorLog(myError);
 		}
 	}
 }

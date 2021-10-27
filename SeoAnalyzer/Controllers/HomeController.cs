@@ -66,7 +66,7 @@ namespace SeoAnalyzer.Controllers
 			}
 			catch (Exception ex)
 			{
-				//Log Error in DB
+				Log.AddErrorLog(ex);
 				res.IsValid = false;
 				res.Message = "An error has occured! Please contact admin";
 			}
