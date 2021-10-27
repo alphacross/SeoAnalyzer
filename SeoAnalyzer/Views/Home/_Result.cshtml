@@ -1,18 +1,43 @@
 ﻿@model SeoAnalyzer.Models.ResultModel
 
-@if (Model.IsCountTotalWords)
-{
-	<h2>Total Words</h2>
-	@Html.Partial("_ResultTable", Model.TotalWords)
-}
-@if (Model.IsCountTotalTags)
-{
-	<h2>Meta Tags</h2>
-	@Html.Partial("_ResultTable", Model.TotalTags)
-}
-@if (Model.IsCountTotalLinks)
-{
-	<h2>External Links</h2>
-	@Html.Partial("_ResultTable", Model.TotalLinks)
-}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	@if (Model.IsCountTotalWords)
+	{
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="words-tab" data-bs-toggle="tab" data-bs-target="#words" type="button" role="tab" aria-controls="home" aria-selected="true">Total Words</button>
+		</li>
+	}
+	@if (Model.IsCountTotalTags)
+	{
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="metas-tab" data-bs-toggle="tab" data-bs-target="#metas" type="button" role="tab" aria-controls="profile" aria-selected="false">Meta Tags</button>
+		</li>
+	}
+	@if (Model.IsCountTotalLinks)
+	{
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="links-tab" data-bs-toggle="tab" data-bs-target="#links" type="button" role="tab" aria-controls="contact" aria-selected="false">External Links</button>
+		</li>
+	}
+</ul>
+<div class="tab-content" id="myTabContent">
+	@if (Model.IsCountTotalWords)
+	{
+		<div class="tab-pane fade" id="words" role="tabpanel" aria-labelledby="words-tab">
+			@Html.Partial("_ResultTable", Model.TotalWords)
+		</div>
+	}
+	@if (Model.IsCountTotalTags)
+	{
+		<div class="tab-pane fade" id="metas" role="tabpanel" aria-labelledby="metas-tab">
+			@Html.Partial("_ResultTable", Model.TotalTags)
+		</div>
+	}
+	@if (Model.IsCountTotalLinks)
+	{
+		<div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
+			@Html.Partial("_ResultTable", Model.TotalLinks)
+		</div>
+	}
+</div>
 

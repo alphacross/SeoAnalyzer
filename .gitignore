@@ -2,8 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/slnx.sqlite
 /.vs
 /packages
 /SeoAnalyzer/bin
 /SeoAnalyzer/obj/Debug
+/CoreLibrary/bin/Debug
+/CoreLibrary/obj/Debug

@@ -21,6 +21,7 @@
 					if (res.IsValid) {
 						$('#result').html(res.Message)
 						BindTable();
+						BindTabs();
 					} else {
 						alert(res.Message)
 					}
@@ -34,6 +35,20 @@
 
 		function BindTable() {
 			$('.table').DataTable()
+		}
+
+		function BindTabs() {
+			var triggerTabList = [].slice.call(document.querySelectorAll('#myTab button'))
+			triggerTabList.forEach(function (triggerEl) {
+				var tabTrigger = new bootstrap.Tab(triggerEl)
+
+				triggerEl.addEventListener('click', function (event) {
+					event.preventDefault()
+					tabTrigger.show()
+				})
+			})
+
+			triggerTabList[0].click();
 		}
 	</script>
 }
